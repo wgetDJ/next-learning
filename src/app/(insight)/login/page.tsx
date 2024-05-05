@@ -1,12 +1,16 @@
 import { FC } from "react";
 import axios from "axios";
+import { AuthRequiredError } from "@/lib/exceptions";
 
 interface DashboardProps {}
 
-const page: FC<DashboardProps> = async({}) => {
-    const {data} =  await axios.get('https://jsonplaceholder.typicode.com/posts/1');
+const session = null;
 
-    return <div>{JSON.stringify(data)}</div>;
+const page: FC<DashboardProps> = async({}) => {
+    
+    if (!session) throw new AuthRequiredError();
+
+    return <div>Page</div>;
 }
 
 export default page;
